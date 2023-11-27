@@ -14,7 +14,7 @@ import { createClient } from 'redis';
             host: 'localhost',
             port: 6379,
           },
-          database: 1,
+          database: 1, // 选择数据库 1 起到隔离作用，类似于命名空间
         });
 
         await client.connect();
