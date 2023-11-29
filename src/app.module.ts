@@ -6,6 +6,9 @@ import { UserModule } from './user/user.module';
 import { RedisModule } from './redis/redis.module';
 import { EmailModule } from './email/email.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { User } from './user/entities/user.entity';
+import { Role } from './user/entities/role.entity';
+import { Permission } from './user/entities/permission.entity';
 
 @Module({
   imports: [
@@ -34,6 +37,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       },
       inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature([User, Role, Permission]),
     UserModule,
     RedisModule,
     EmailModule,

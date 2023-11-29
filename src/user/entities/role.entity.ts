@@ -21,6 +21,13 @@ export class Role {
   })
   name: string;
 
+  @Column({
+    length: 100,
+    comment: '角色描述',
+    default: '',
+  })
+  description: string;
+
   @ManyToMany(() => User)
   users: User[];
 
