@@ -56,10 +56,10 @@ export class UserController {
     isArray: true,
   })
   async userLogin(@Body() loginUser: LoginUserDto) {
-    const user = await this.userService.login(loginUser, false);
+    const vo = await this.userService.login(loginUser, false);
     return {
       type: HttpStatus.OK,
-      data: user,
+      data: vo,
       message: 'success',
     };
   }
@@ -74,10 +74,10 @@ export class UserController {
     isArray: true,
   })
   async adminLogin(@Body() loginUser: LoginUserDto) {
-    const user = await this.userService.login(loginUser, true);
+    const vo = await this.userService.login(loginUser, true);
     return {
       type: HttpStatus.OK,
-      data: user,
+      data: vo,
       message: 'success',
     };
   }

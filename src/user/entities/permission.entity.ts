@@ -19,7 +19,4 @@ export class Permission {
     comment: '权限描述',
   })
   description: string;
-
-  @ManyToMany(() => Role)
-  roles: Role[];
 }

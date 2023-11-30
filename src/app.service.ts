@@ -4,15 +4,16 @@ import { md5 } from './utils';
 import { Role } from './user/entities/role.entity';
 import { Permission } from './user/entities/permission.entity';
 import { InjectEntityManager, InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AppService {
   @InjectRepository(User)
-  private readonly userRepository;
+  private readonly userRepository: Repository<User>;
   @InjectRepository(Permission)
-  private readonly permissionRepository;
+  private readonly permissionRepository: Repository<Permission>;
   @InjectRepository(Role)
-  private readonly roleRepository;
+  private readonly roleRepository: Repository<Role>;
   getHello(): string {
     return 'Hello World!';
   }
@@ -53,8 +54,8 @@ export class AppService {
     user.permissions = [accessOfUsers];
 
     await Promise.all([
-      this.permissionRepository.save([accessOfUsers, accessOfRoles]),
-      this.roleRepository.save([admin, user]),
+      // this.permissionRepository.save([accessOfUsers, accessOfRoles]),
+      // this.roleRepository.save([admin, user]),
       this.userRepository.save([user1, user2]),
     ]);
   }

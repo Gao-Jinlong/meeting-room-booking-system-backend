@@ -12,11 +12,18 @@ import { User } from './entities/user.entity';
 import { RedisService } from 'src/redis/redis.service';
 import { md5 } from 'src/utils';
 import { LoginUserDto } from './dto/login-user.dto';
+import { LoginUserVo } from './vo/login-user.vo';
+import { JwtService } from '@nestjs/jwt';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UserService {
   @Inject(RedisService)
   private redisService: RedisService;
+  @Inject(JwtService)
+  private jwtService: JwtService;
+  @Inject(ConfigService)
+  private configService: ConfigService;
   private logger = new Logger();
 
   @InjectRepository(User)
@@ -58,6 +65,54 @@ export class UserService {
   }
 
   async login(loginUser: LoginUserDto, isAdmin: boolean) {
+    const userInfo = await this.requireUserVo(loginUser, isAdmin);
+
+    const vo = new LoginUserVo();
+    vo.userInfo = {
+      id: userInfo.id,
+      username: userInfo.username,
+      nickName: userInfo.nickName,
+      email: userInfo.email,
+      phoneNumber: userInfo.phoneNumber,
+      createTime: userInfo.createTime,
+      isFrozen: userInfo.isFrozen,
+      isAdmin: userInfo.isAdmin,
+      roles: userInfo.roles.map((item) => item.name),
+      permissions: userInfo.roles.reduce((arr, item) => {
+        item.permissions.forEach((permission) => {
+          if (arr.indexOf(permission) === -1) {
+            arr.push(permission);
+          }
+        });
+
+        return arr;
+      }, []),
+    };
+    console.log(userInfo);
+
+    const accessToken = await this.generateJwt(
+      {
+        id: userInfo.id,
+        username: userInfo.username,
+        roles: vo.userInfo.roles,
+        permissions: vo.userInfo.permissions,
+      },
+      this.configService.get<string>('jwt_access_token_expires_time'),
+    );
+
+    const refreshToken = await this.generateJwt(
+      {
+        id: userInfo.id,
+      },
+      this.configService.get<string>('jwt_refresh_token_expires_time'),
+    );
+
+    vo.accessToken = accessToken;
+    vo.refreshToken = refreshToken;
+
+    return vo;
+  }
+  async requireUserVo(loginUser: LoginUserDto, isAdmin: boolean) {
     const user = await this.userRepository.findOne({
       where: {
         username: loginUser.username,
@@ -75,5 +130,16 @@ export class UserService {
     }
 
     return user;
+  }
+  async generateJwt(
+    user: Partial<LoginUserVo['userInfo']>,
+    expiresIn?: string,
+  ) {
+    const payload = user;
+
+    return this.jwtService.sign(payload, {
+      secret: this.configService.get<string>('jwt_secret'),
+      expiresIn: expiresIn,
+    });
   }
 }
