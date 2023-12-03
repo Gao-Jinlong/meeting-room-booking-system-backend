@@ -88,7 +88,6 @@ export class UserService {
         return arr;
       }, []),
     };
-    console.log(userInfo);
 
     const accessToken = await this.generateJwt(
       {
@@ -141,5 +140,37 @@ export class UserService {
       secret: this.configService.get<string>('jwt_secret'),
       expiresIn: expiresIn,
     });
+  }
+  async refreshToken(refreshToken: string) {
+    const userInfo = this.jwtService.verify(refreshToken);
+    const user = await this.userRepository.findOne({
+      where: {
+        id: userInfo['id'],
+      },
+      relations: ['roles', 'roles.permissions'],
+    });
+    const access_token = await this.generateJwt(
+      {
+        id: user.id,
+        username: user.username,
+        roles: user.roles.map((item) => item.name),
+        permissions: user.roles
+          .map((item) => item.permissions)
+          .flat()
+          .map((item) => item.code),
+      },
+      this.configService.get<string>('jwt_access_token_expires_time'),
+    );
+    const refresh_token = await this.generateJwt(
+      {
+        id: userInfo.id,
+      },
+      this.configService.get<string>('jwt_refresh_token_expires_time'),
+    );
+
+    return {
+      access_token,
+      refresh_token,
+    };
   }
 }

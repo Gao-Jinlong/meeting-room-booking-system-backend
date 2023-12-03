@@ -6,13 +6,27 @@ import {
   Query,
   Get,
   HttpStatus,
+  UnauthorizedException,
+  SetMetadata,
+  Request,
 } from '@nestjs/common';
 import { UserService } from './user.service';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { EmailService } from 'src/email/email.service';
 import { RedisService } from 'src/redis/redis.service';
 import { LoginUserDto } from './dto/login-user.dto';
-import { ApiBadRequestResponse, ApiBody, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBadRequestResponse,
+  ApiBearerAuth,
+  ApiBody,
+  ApiTags,
+} from '@nestjs/swagger';
+import { Request as RequestType } from 'express';
+import {
+  RequireLogin,
+  RequirePermission,
+  UserInfo,
+} from 'src/custom.decorator';
 
 @Controller('user')
 @ApiTags('user')
@@ -78,6 +92,57 @@ export class UserController {
     return {
       type: HttpStatus.OK,
       data: vo,
+      message: 'success',
+    };
+  }
+
+  @Get('refresh')
+  async refresh(@Query('refreshToken') refreshToken: string) {
+    try {
+      const tokens = await this.userService.refreshToken(refreshToken);
+      return {
+        type: HttpStatus.OK,
+        data: tokens,
+        message: 'success',
+      };
+    } catch (e) {
+      console.log(e);
+      throw new UnauthorizedException('token 已失效');
+    }
+  }
+
+  @Get('needLogin')
+  @RequireLogin()
+  @RequirePermission('access_of_roles')
+  @ApiBearerAuth('bearer')
+  async needLogin(
+    @Request() request: RequestType,
+    @UserInfo('username') username: string,
+    @UserInfo() userInfo,
+  ) {
+    try {
+      return {
+        type: HttpStatus.OK,
+        data: {
+          user: request.user,
+          userInfo,
+          username,
+        },
+        message: 'success',
+      };
+    } catch (e) {
+      console.log(e);
+      throw new UnauthorizedException('token 已失效');
+    }
+  }
+
+  @Get('allowAnonymous')
+  async allowAnonymous() {
+    return {
+      type: HttpStatus.OK,
+      data: {
+        message: '允许匿名访问',
+      },
       message: 'success',
     };
   }

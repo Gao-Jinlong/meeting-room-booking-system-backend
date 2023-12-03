@@ -14,6 +14,11 @@ async function bootstrap() {
     .setDescription('The API description')
     .setVersion('0.1')
     .addTag('meeting')
+    .addBearerAuth({
+      type: 'http',
+      description: 'jwt auth',
+      name: 'bearer',
+    })
     .build();
 
   const document = SwaggerModule.createDocument(app, swaggerConfig);
