@@ -15,9 +15,6 @@ export class AppController {
   @Get('init-data')
   async initData() {
     await this.appService.initData();
-    return {
-      type: HttpStatus.OK,
-      message: 'success',
-    };
+    return 'success';
   }
 }

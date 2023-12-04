@@ -71,11 +71,7 @@ export class UserController {
   })
   async userLogin(@Body() loginUser: LoginUserDto) {
     const vo = await this.userService.login(loginUser, false);
-    return {
-      type: HttpStatus.OK,
-      data: vo,
-      message: 'success',
-    };
+    return vo;
   }
 
   @Post('admin/login')
@@ -89,22 +85,14 @@ export class UserController {
   })
   async adminLogin(@Body() loginUser: LoginUserDto) {
     const vo = await this.userService.login(loginUser, true);
-    return {
-      type: HttpStatus.OK,
-      data: vo,
-      message: 'success',
-    };
+    return vo;
   }
 
   @Get('refresh')
   async refresh(@Query('refreshToken') refreshToken: string) {
     try {
       const tokens = await this.userService.refreshToken(refreshToken);
-      return {
-        type: HttpStatus.OK,
-        data: tokens,
-        message: 'success',
-      };
+      return tokens;
     } catch (e) {
       console.log(e);
       throw new UnauthorizedException('token 已失效');
@@ -122,13 +110,9 @@ export class UserController {
   ) {
     try {
       return {
-        type: HttpStatus.OK,
-        data: {
-          user: request.user,
-          userInfo,
-          username,
-        },
-        message: 'success',
+        user: request.user,
+        userInfo,
+        username,
       };
     } catch (e) {
       console.log(e);
@@ -139,11 +123,7 @@ export class UserController {
   @Get('allowAnonymous')
   async allowAnonymous() {
     return {
-      type: HttpStatus.OK,
-      data: {
-        message: '允许匿名访问',
-      },
-      message: 'success',
+      message: '允许匿名访问',
     };
   }
 }
