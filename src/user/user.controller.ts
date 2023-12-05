@@ -7,7 +7,6 @@ import {
   Get,
   HttpStatus,
   UnauthorizedException,
-  SetMetadata,
   Request,
 } from '@nestjs/common';
 import { UserService } from './user.service';
@@ -19,6 +18,7 @@ import {
   ApiBadRequestResponse,
   ApiBearerAuth,
   ApiBody,
+  ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
 import { Request as RequestType } from 'express';
@@ -27,6 +27,7 @@ import {
   RequirePermission,
   UserInfo,
 } from 'src/custom.decorator';
+import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
 
 @Controller('user')
 @ApiTags('user')
@@ -125,5 +126,24 @@ export class UserController {
     return {
       message: '允许匿名访问',
     };
+  }
+
+  @ApiBearerAuth('bearer')
+  @Get('info')
+  @RequireLogin()
+  async info(@UserInfo('id') userId: number) {
+    console.log('userInfo', userId);
+    return await this.userService.findUserDetailById(userId);
+  }
+
+  @ApiBearerAuth('bearer')
+  @Post(['update_password', 'admin/update_password'])
+  @RequireLogin()
+  async updatePassword(
+    @UserInfo('id') userId: number,
+    @Body() passwordDto: UpdateUserPasswordDto,
+  ) {
+    console.log('userInfo', userId);
+    return this.userService.updatePassword(userId, passwordDto);
   }
 }

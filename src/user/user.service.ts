@@ -4,6 +4,7 @@ import {
   Inject,
   Injectable,
   Logger,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { RegisterUserDto } from './dto/register-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -15,6 +16,7 @@ import { LoginUserDto } from './dto/login-user.dto';
 import { LoginUserVo } from './vo/login-user.vo';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { UserDetailVo } from './vo/user-detail.vo';
 
 @Injectable()
 export class UserService {
@@ -172,5 +174,63 @@ export class UserService {
       access_token,
       refresh_token,
     };
+  }
+  async findUserDetailById(userId: number) {
+    if (!userId) {
+      throw new UnauthorizedException('token 已失效');
+    }
+    const user = await this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+      relations: ['roles'],
+    });
+
+    const vo = new UserDetailVo();
+    vo.id = user.id;
+    vo.username = user.username;
+    vo.nickName = user.nickName;
+    vo.email = user.email;
+    vo.phoneNumber = user.phoneNumber;
+    vo.createTime = user.createTime;
+    vo.isFrozen = user.isFrozen;
+    vo.isAdmin = user.isAdmin;
+    vo.roles = user.roles;
+
+    return vo;
+  }
+
+  async updatePassword(userId: number, passwordDto: any) {
+    const captcha = await this.redisService.get(
+      `update_password_captcha_${passwordDto.email}`,
+    );
+
+    if (!captcha) {
+      throw new HttpException('验证码已过期', HttpStatus.BAD_REQUEST);
+    }
+
+    if (passwordDto.captcha !== captcha) {
+      throw new HttpException('验证码不正确', HttpStatus.BAD_REQUEST);
+    }
+
+    const user = await this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+    });
+
+    if (!user) {
+      throw new UnauthorizedException('用户不存在');
+    }
+
+    user.password = passwordDto.password;
+
+    try {
+      await this.userRepository.save(user);
+      return '修改成功';
+    } catch (e) {
+      this.logger.error(e, UserService);
+      throw new HttpException('修改失败', HttpStatus.BAD_REQUEST);
+    }
   }
 }
