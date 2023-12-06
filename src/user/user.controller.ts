@@ -28,6 +28,7 @@ import {
   UserInfo,
 } from 'src/custom.decorator';
 import { UpdateUserPasswordDto } from './dto/update-user-password.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('user')
 @ApiTags('user')
@@ -145,5 +146,29 @@ export class UserController {
   ) {
     console.log('userInfo', userId);
     return this.userService.updatePassword(userId, passwordDto);
+  }
+
+  @Get('update_password/captcha')
+  @RequireLogin()
+  @ApiBearerAuth('bearer')
+  async updatePasswordCaptcha(@Query('address') address: string) {
+    return await this.userService.updatePasswordCaptcha(address);
+  }
+
+  @Post(['update', 'admin/update'])
+  @RequireLogin()
+  @ApiBearerAuth('bearer')
+  async update(
+    @UserInfo('id') userId: number,
+    @Body() updateUserDto: UpdateUserDto,
+  ) {
+    return await this.userService.update(userId, updateUserDto);
+  }
+
+  @Get('update/captcha')
+  @RequireLogin()
+  @ApiBearerAuth('bearer')
+  async updateCaptcha(@Query('address') address: string) {
+    return await this.userService.sendUpdateUserInfoCaptcha(address);
   }
 }
