@@ -26,7 +26,9 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api', app, document, {
+    swaggerUrl: 'api-json',
+  });
 
   const configService = app.get(ConfigService);
 

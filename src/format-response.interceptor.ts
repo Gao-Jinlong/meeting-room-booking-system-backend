@@ -7,6 +7,10 @@ import {
 import { Response } from 'express';
 import { Observable, map } from 'rxjs';
 
+/**
+ * 格式化返回数据
+ */
+
 @Injectable()
 export class FormatResponseInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
