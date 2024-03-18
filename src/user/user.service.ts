@@ -19,6 +19,8 @@ import { ConfigService } from '@nestjs/config';
 import { UserDetailVo } from './vo/user-detail.vo';
 import { EmailService } from 'src/email/email.service';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { RefreshTokenVo } from './vo/refresh-token.vo';
+import { UserListVo } from './vo/user-list.vo';
 
 @Injectable()
 export class UserService {
@@ -174,10 +176,11 @@ export class UserService {
       this.configService.get<string>('jwt_refresh_token_expires_time'),
     );
 
-    return {
-      access_token,
-      refresh_token,
-    };
+    const vo = new RefreshTokenVo();
+    vo.access_token = access_token;
+    vo.refresh_token = refresh_token;
+
+    return vo;
   }
   async findUserDetailById(userId: number) {
     if (!userId) {
@@ -356,9 +359,10 @@ export class UserService {
       where: condition,
     });
 
-    return {
-      users,
-      totalCount,
-    };
+    const vo = new UserListVo();
+    vo.users = users;
+    vo.totalCount = totalCount;
+
+    return vo;
   }
 }

@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Role } from '../entities/role.entity';
 
-export class UserDetailVo {
+class User {
   @ApiProperty()
   id: number;
   @ApiProperty()
@@ -13,11 +12,18 @@ export class UserDetailVo {
   @ApiProperty()
   phoneNumber: string;
   @ApiProperty()
-  createTime: Date;
-  @ApiProperty()
   isFrozen: boolean;
   @ApiProperty()
-  isAdmin: boolean;
+  avatar: string;
   @ApiProperty()
-  roles: Role[];
+  createTime: Date;
+}
+export class UserListVo {
+  @ApiProperty({
+    type: [User],
+  })
+  users: User[];
+
+  @ApiProperty()
+  totalCount: number;
 }
