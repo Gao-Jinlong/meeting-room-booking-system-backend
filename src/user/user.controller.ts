@@ -100,11 +100,6 @@ export class UserController {
     description: '用户名或密码错误 | 用户不存在',
     type: String,
   })
-  @ApiResponse({
-    status: HttpStatus.OK,
-    description: '登录成功',
-    type: LoginUserDto,
-  })
   @Post('login')
   async userLogin(@Body() loginUser: LoginUserDto) {
     const vo = await this.userService.login(loginUser, false);
@@ -200,20 +195,12 @@ export class UserController {
     type: String,
     description: '验证码已失效/验证码不正确/',
   })
-  @ApiBearerAuth('bearer')
   @Post(['update_password', 'admin/update_password'])
-  @RequireLogin()
-  async updatePassword(
-    @UserInfo('id') userId: number,
-    @Body() passwordDto: UpdateUserPasswordDto,
-  ) {
-    console.log('userInfo', userId);
-    return this.userService.updatePassword(userId, passwordDto);
+  async updatePassword(@Body() passwordDto: UpdateUserPasswordDto) {
+    return this.userService.updatePassword(passwordDto);
   }
 
   @Get('update_password/captcha')
-  @RequireLogin()
-  @ApiBearerAuth('bearer')
   @ApiQuery({
     name: 'address',
     description: '邮箱地址',

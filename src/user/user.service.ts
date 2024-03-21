@@ -210,7 +210,7 @@ export class UserService {
   getUpdatePasswordEmailCaptchaKey(email: string) {
     return `update_password_captcha_${email}`;
   }
-  async updatePassword(userId: number, passwordDto: any) {
+  async updatePassword(passwordDto: any) {
     const captcha = await this.redisService.get(
       this.getUpdatePasswordEmailCaptchaKey(passwordDto.email),
     );
@@ -225,9 +225,13 @@ export class UserService {
 
     const user = await this.userRepository.findOne({
       where: {
-        id: userId,
+        username: passwordDto.username,
       },
     });
+
+    if (user.email !== passwordDto.email) {
+      throw new HttpException('邮箱不正确', HttpStatus.BAD_REQUEST);
+    }
 
     if (!user) {
       throw new UnauthorizedException('用户不存在');

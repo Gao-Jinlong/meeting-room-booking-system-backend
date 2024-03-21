@@ -17,6 +17,8 @@ async function bootstrap() {
   app.useGlobalFilters(new UnloginFilter());
   app.useGlobalFilters(new CustomExceptionFilter());
 
+  app.enableCors();
+
   const swaggerConfig = new DocumentBuilder()
     .setTitle('meeting-room-booking-system-backend')
     .setDescription('The API description')

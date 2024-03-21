@@ -15,7 +15,7 @@ export class EmailService {
       secure: false,
       auth: {
         user: configService.get('nodemailer_auth_user'),
-        pass: configService.get('nodemailer_auth_pass'),
+        pass: configService.get('mail_password'),
       },
     });
   }

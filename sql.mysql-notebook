@@ -2,7 +2,7 @@
     "type": "MySQLNotebook",
     "version": "1.0",
     "caption": "DB Notebook",
-    "content": "\\about\nCREATE SCHEMA `meeting-room-booking-system`;",
+    "content": "\\about\nCREATE SCHEMA `meeting-room-booking-system`;\nSELECT * from `meeting-room-booking-system`.`users`;\ndelete from `meeting-room-booking-system`.`users`\nwhere id = 5;",
     "options": {
         "tabSize": 4,
         "indentSize": 4,
@@ -15,12 +15,12 @@
             {
                 "inSelectionMode": false,
                 "selectionStart": {
-                    "lineNumber": 2,
-                    "column": 45
+                    "lineNumber": 5,
+                    "column": 14
                 },
                 "position": {
-                    "lineNumber": 2,
-                    "column": 45
+                    "lineNumber": 5,
+                    "column": 14
                 }
             }
         ],
@@ -74,14 +74,9 @@
                 "end": 2,
                 "language": "mysql",
                 "result": {
-                    "type": "text",
-                    "text": [
-                        {
-                            "type": 4,
-                            "index": 0,
-                            "resultId": "81128a70-165d-4940-fe8a-8e9776534799",
-                            "content": "OK, 1 row affected in 9ms"
-                        }
+                    "type": "resultIds",
+                    "list": [
+                        "7cfcd323-88a5-42df-e5c4-e5c005608054"
                     ]
                 },
                 "currentHeight": 28,
@@ -93,6 +88,347 @@
                             "length": 44
                         },
                         "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 44,
+                            "length": 0
+                        },
+                        "contentStart": 43,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "57ea2a53-3d6a-4477-ddcf-a3d81bb06a22",
+                    "resultId": "7cfcd323-88a5-42df-e5c4-e5c005608054",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": "ginlon",
+                            "2": "e10adc3949ba59abbe56e057f20f883e",
+                            "3": "金龙",
+                            "4": null,
+                            "5": "ginlon5241@gmail.com",
+                            "6": "13611111111",
+                            "7": 1,
+                            "8": 1,
+                            "9": "2024-03-17 09:39:37.620033",
+                            "10": "2024-03-17 15:26:05"
+                        },
+                        {
+                            "0": 2,
+                            "1": "liming",
+                            "2": "c33367701511b4f6020ec61ded352059",
+                            "3": "李明",
+                            "4": null,
+                            "5": "yy@yy.com",
+                            "6": null,
+                            "7": 1,
+                            "8": 0,
+                            "9": "2024-03-17 09:39:37.636895",
+                            "10": "2024-03-17 15:26:27"
+                        },
+                        {
+                            "0": 3,
+                            "1": "ginlon",
+                            "2": "e10adc3949ba59abbe56e057f20f883e",
+                            "3": "金龙",
+                            "4": null,
+                            "5": "ginlon5241@gmail.com",
+                            "6": "13611111111",
+                            "7": 0,
+                            "8": 1,
+                            "9": "2024-03-17 13:56:57.918085",
+                            "10": "2024-03-17 13:56:57.918085"
+                        },
+                        {
+                            "0": 4,
+                            "1": "liming",
+                            "2": "c33367701511b4f6020ec61ded352059",
+                            "3": "李明",
+                            "4": null,
+                            "5": "yy@yy.com",
+                            "6": null,
+                            "7": 0,
+                            "8": 0,
+                            "9": "2024-03-17 13:56:57.952670",
+                            "10": "2024-03-17 13:56:57.952670"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4
+                            }
+                        },
+                        {
+                            "title": "username",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "password",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "nick_name",
+                            "field": "3",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "avatar",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "email",
+                            "field": "5",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "phoneNumber",
+                            "field": "6",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "isFrozen",
+                            "field": "7",
+                            "dataType": {
+                                "type": 1
+                            }
+                        },
+                        {
+                            "title": "isAdmin",
+                            "field": "8",
+                            "dataType": {
+                                "type": 1
+                            }
+                        },
+                        {
+                            "title": "createTime",
+                            "field": "9",
+                            "dataType": {
+                                "type": 26
+                            }
+                        },
+                        {
+                            "title": "updateTime",
+                            "field": "10",
+                            "dataType": {
+                                "type": 26
+                            }
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 4 records retrieved in 2.003ms"
+                    },
+                    "totalRowCount": 4,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "\n\nSELECT * from `meeting-room-booking-system`.`users`;"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 3,
+                "end": 3,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "f4a4ed6a-4785-4c24-f0fe-cdd54b12d420"
+                    ]
+                },
+                "currentHeight": 167.66665649414062,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 52
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 52,
+                            "length": 0
+                        },
+                        "contentStart": 51,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "57ea2a53-3d6a-4477-ddcf-a3d81bb06a22",
+                    "resultId": "f4a4ed6a-4785-4c24-f0fe-cdd54b12d420",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": "ginlon",
+                            "2": "e10adc3949ba59abbe56e057f20f883e",
+                            "3": "金龙",
+                            "4": null,
+                            "5": "ginlon5241@gmail.com",
+                            "6": "13611111111",
+                            "7": 1,
+                            "8": 1,
+                            "9": "2024-03-17 09:39:37.620033",
+                            "10": "2024-03-17 15:26:05"
+                        },
+                        {
+                            "0": 2,
+                            "1": "liming",
+                            "2": "c33367701511b4f6020ec61ded352059",
+                            "3": "李明",
+                            "4": null,
+                            "5": "yy@yy.com",
+                            "6": null,
+                            "7": 1,
+                            "8": 0,
+                            "9": "2024-03-17 09:39:37.636895",
+                            "10": "2024-03-17 15:26:27"
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4
+                            }
+                        },
+                        {
+                            "title": "username",
+                            "field": "1",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "password",
+                            "field": "2",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "nick_name",
+                            "field": "3",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "avatar",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "email",
+                            "field": "5",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "phoneNumber",
+                            "field": "6",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "isFrozen",
+                            "field": "7",
+                            "dataType": {
+                                "type": 1
+                            }
+                        },
+                        {
+                            "title": "isAdmin",
+                            "field": "8",
+                            "dataType": {
+                                "type": 1
+                            }
+                        },
+                        {
+                            "title": "createTime",
+                            "field": "9",
+                            "dataType": {
+                                "type": 26
+                            }
+                        },
+                        {
+                            "title": "updateTime",
+                            "field": "10",
+                            "dataType": {
+                                "type": 26
+                            }
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 2 records retrieved in 1.043ms"
+                    },
+                    "totalRowCount": 2,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT * from `meeting-room-booking-system`.`users`;"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 4,
+                "end": 5,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "46d79412-bdbc-4454-caa0-e3f10a77b4d2",
+                            "content": "OK, 1 row affected in 5.998ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 63
+                        },
+                        "contentStart": 1,
                         "state": 0
                     }
                 ]
