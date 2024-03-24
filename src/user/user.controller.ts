@@ -236,7 +236,7 @@ export class UserController {
   @Get('update/captcha')
   @RequireLogin()
   @ApiBearerAuth('bearer')
-  async updateCaptcha(@Query('address') address: string) {
+  async updateCaptcha(@UserInfo('email') address: string) {
     return await this.userService.sendUpdateUserInfoCaptcha(address);
   }
 

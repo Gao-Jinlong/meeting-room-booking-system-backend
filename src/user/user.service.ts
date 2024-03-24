@@ -103,6 +103,7 @@ export class UserService {
         username: userInfo.username,
         roles: vo.userInfo.roles,
         permissions: vo.userInfo.permissions,
+        email: vo.userInfo.email,
       },
       this.configService.get<string>('jwt_access_token_expires_time'),
     );
@@ -162,6 +163,7 @@ export class UserService {
         id: user.id,
         username: user.username,
         roles: user.roles.map((item) => item.name),
+        email: user.email,
         permissions: user.roles
           .map((item) => item.permissions)
           .flat()

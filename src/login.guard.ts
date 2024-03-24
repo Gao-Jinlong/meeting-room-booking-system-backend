@@ -17,6 +17,7 @@ export interface JwtUserData {
   username: string;
   roles: string[];
   permissions: Permission[];
+  email: string;
 }
 declare module 'express' {
   interface Request {
