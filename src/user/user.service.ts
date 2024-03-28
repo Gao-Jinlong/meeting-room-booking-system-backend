@@ -205,6 +205,7 @@ export class UserService {
     vo.isFrozen = user.isFrozen;
     vo.isAdmin = user.isAdmin;
     vo.roles = user.roles;
+    vo.avatar = user.avatar
 
     return vo;
   }

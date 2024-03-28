@@ -7,6 +7,8 @@ export class UserDetailVo {
   @ApiProperty()
   username: string;
   @ApiProperty()
+  avatar: string;
+  @ApiProperty()
   nickName: string;
   @ApiProperty()
   email: string;
