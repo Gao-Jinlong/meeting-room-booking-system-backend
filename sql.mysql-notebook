@@ -2,7 +2,7 @@
     "type": "MySQLNotebook",
     "version": "1.0",
     "caption": "DB Notebook",
-    "content": "\\about\nCREATE SCHEMA `meeting-room-booking-system`;\nSELECT * from `meeting-room-booking-system`.`users`;\ndelete from `meeting-room-booking-system`.`users`\nwhere id = 5;",
+    "content": "\\about\nCREATE SCHEMA `meeting-room-booking-system`;\nSELECT * from `meeting-room-booking-system`.`users`;\ndelete from `meeting-room-booking-system`.`users`\nwhere id = 5;\n\nUPDATE `meeting-room-booking-system`.`users` SET avatar=\"uploads\\\\1712070986099-327865746-专题图 (1).png\" WHERE id=2;",
     "options": {
         "tabSize": 4,
         "indentSize": 4,
@@ -15,12 +15,12 @@
             {
                 "inSelectionMode": false,
                 "selectionStart": {
-                    "lineNumber": 5,
-                    "column": 14
+                    "lineNumber": 6,
+                    "column": 1
                 },
                 "position": {
-                    "lineNumber": 5,
-                    "column": 14
+                    "lineNumber": 6,
+                    "column": 1
                 }
             }
         ],
@@ -76,7 +76,7 @@
                 "result": {
                     "type": "resultIds",
                     "list": [
-                        "7cfcd323-88a5-42df-e5c4-e5c005608054"
+                        "acb40cb0-f47f-496c-918b-67404b0a70b2"
                     ]
                 },
                 "currentHeight": 28,
@@ -103,8 +103,8 @@
             },
             "data": [
                 {
-                    "tabId": "57ea2a53-3d6a-4477-ddcf-a3d81bb06a22",
-                    "resultId": "7cfcd323-88a5-42df-e5c4-e5c005608054",
+                    "tabId": "4f49d650-b698-4977-ac23-44f848dc4d26",
+                    "resultId": "acb40cb0-f47f-496c-918b-67404b0a70b2",
                     "rows": [
                         {
                             "0": 1,
@@ -257,7 +257,7 @@
                 "result": {
                     "type": "resultIds",
                     "list": [
-                        "f4a4ed6a-4785-4c24-f0fe-cdd54b12d420"
+                        "0eed6ecb-2e4a-4d36-a189-80c332ccf90b"
                     ]
                 },
                 "currentHeight": 167.66665649414062,
@@ -284,13 +284,13 @@
             },
             "data": [
                 {
-                    "tabId": "57ea2a53-3d6a-4477-ddcf-a3d81bb06a22",
-                    "resultId": "f4a4ed6a-4785-4c24-f0fe-cdd54b12d420",
+                    "tabId": "4f49d650-b698-4977-ac23-44f848dc4d26",
+                    "resultId": "0eed6ecb-2e4a-4d36-a189-80c332ccf90b",
                     "rows": [
                         {
                             "0": 1,
                             "1": "ginlon",
-                            "2": "e10adc3949ba59abbe56e057f20f883e",
+                            "2": "e3ceb5881a0a1fdaad01296d7554868d",
                             "3": "金龙",
                             "4": null,
                             "5": "ginlon5241@gmail.com",
@@ -298,20 +298,33 @@
                             "7": 1,
                             "8": 1,
                             "9": "2024-03-17 09:39:37.620033",
-                            "10": "2024-03-17 15:26:05"
+                            "10": "2024-03-21 15:19:58"
                         },
                         {
                             "0": 2,
                             "1": "liming",
                             "2": "c33367701511b4f6020ec61ded352059",
                             "3": "李明",
-                            "4": null,
+                            "4": "uploads\\1712070986099-327865746-专题图 (1).png",
                             "5": "yy@yy.com",
                             "6": null,
                             "7": 1,
                             "8": 0,
                             "9": "2024-03-17 09:39:37.636895",
-                            "10": "2024-03-17 15:26:27"
+                            "10": "2024-04-02 15:21:16.008900"
+                        },
+                        {
+                            "0": 6,
+                            "1": "ccc",
+                            "2": "c1f68ec06b490b3ecb4066b1b13a9ee9",
+                            "3": "ccc",
+                            "4": null,
+                            "5": "ginlon5241@163.com",
+                            "6": null,
+                            "7": 0,
+                            "8": 0,
+                            "9": "2024-03-20 15:22:13.763052",
+                            "10": "2024-03-20 15:22:13.763052"
                         }
                     ],
                     "columns": [
@@ -394,9 +407,9 @@
                         }
                     ],
                     "executionInfo": {
-                        "text": "OK, 2 records retrieved in 1.043ms"
+                        "text": "OK, 3 records retrieved in 2.457ms"
                     },
-                    "totalRowCount": 2,
+                    "totalRowCount": 3,
                     "hasMoreRows": false,
                     "currentPage": 0,
                     "index": 0,
@@ -407,7 +420,7 @@
         {
             "state": {
                 "start": 4,
-                "end": 5,
+                "end": 7,
                 "language": "mysql",
                 "result": {
                     "type": "text",
@@ -415,8 +428,8 @@
                         {
                             "type": 4,
                             "index": 0,
-                            "resultId": "46d79412-bdbc-4454-caa0-e3f10a77b4d2",
-                            "content": "OK, 1 row affected in 5.998ms"
+                            "resultId": "dd5583dd-a894-4ac6-963c-43dcb11f3242",
+                            "content": "OK, 1 row affected in 6.738ms"
                         }
                     ]
                 },
@@ -429,6 +442,15 @@
                             "length": 63
                         },
                         "contentStart": 1,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 63,
+                            "length": 116
+                        },
+                        "contentStart": 65,
                         "state": 0
                     }
                 ]
