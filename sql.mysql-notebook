@@ -2,7 +2,7 @@
     "type": "MySQLNotebook",
     "version": "1.0",
     "caption": "DB Notebook",
-    "content": "\\about\nCREATE SCHEMA `meeting-room-booking-system`;\nSELECT * from `meeting-room-booking-system`.`users`;\ndelete from `meeting-room-booking-system`.`users`\nwhere id = 5;\n\nUPDATE `meeting-room-booking-system`.`users` SET avatar=\"uploads\\\\1712070986099-327865746-专题图 (1).png\" WHERE id=2;\nSELECT * from `meeting-room-booking-system`.meeting_room;\nDELETE FROM `meeting-room-booking-system`.meeting_room\nWHERE id NOT IN (\n    # 通过一个虚拟表避免同时查询和更新同一个表\n    SELECT MIN_ID\n    FROM (\n        SELECT MIN(id) AS MIN_ID\n        FROM `meeting-room-booking-system`.meeting_room\n        GROUP BY name\n    ) AS subquery # 每个派生(derived)表必须有他自己的别名\n);",
+    "content": "\\about\nCREATE SCHEMA `meeting-room-booking-system`;\nSELECT * from `meeting-room-booking-system`.`users`;\ndelete from `meeting-room-booking-system`.`users`\nwhere id = 5;\n\nUPDATE `meeting-room-booking-system`.`users` SET avatar=\"uploads\\\\1712070986099-327865746-专题图 (1).png\" WHERE id=2;\nSELECT * from `meeting-room-booking-system`.meeting_room;\nDELETE FROM `meeting-room-booking-system`.meeting_room\nWHERE id NOT IN (\n    # 通过一个虚拟表避免同时查询和更新同一个表\n    SELECT MIN_ID\n    FROM (\n        SELECT MIN(id) AS MIN_ID\n        FROM `meeting-room-booking-system`.meeting_room\n        GROUP BY name\n    ) AS subquery # 每个派生(derived)表必须有他自己的别名\n);\nSELECT * FROM `meeting-room-booking-system`.booking;",
     "options": {
         "tabSize": 4,
         "indentSize": 4,
@@ -15,22 +15,22 @@
             {
                 "inSelectionMode": false,
                 "selectionStart": {
-                    "lineNumber": 8,
-                    "column": 58
+                    "lineNumber": 3,
+                    "column": 53
                 },
                 "position": {
-                    "lineNumber": 8,
-                    "column": 58
+                    "lineNumber": 3,
+                    "column": 53
                 }
             }
         ],
         "viewState": {
             "scrollLeft": 0,
             "firstPosition": {
-                "lineNumber": 2,
+                "lineNumber": 4,
                 "column": 1
             },
-            "firstPositionDeltaTop": 33
+            "firstPositionDeltaTop": 91
         },
         "contributionsState": {
             "editor.contrib.folding": {},
@@ -76,7 +76,7 @@
                 "result": {
                     "type": "resultIds",
                     "list": [
-                        "6cbbf3f4-6595-4588-c99d-8b62c89e01f4"
+                        "0ba534c0-3523-4dae-8f37-b9154796d82d"
                     ]
                 },
                 "currentHeight": 28,
@@ -103,8 +103,8 @@
             },
             "data": [
                 {
-                    "tabId": "04b00cc8-ca0f-45d9-b7f0-f52d4c33855e",
-                    "resultId": "6cbbf3f4-6595-4588-c99d-8b62c89e01f4",
+                    "tabId": "623ec85f-7bba-4ce9-fc9e-00e1424cec13",
+                    "resultId": "0ba534c0-3523-4dae-8f37-b9154796d82d",
                     "rows": [
                         {
                             "0": 1,
@@ -257,10 +257,10 @@
                 "result": {
                     "type": "resultIds",
                     "list": [
-                        "72fe0fca-6ba2-4381-fc54-c301f27dca63"
+                        "b6914998-f0f8-48cb-c09f-667e4f861a0f"
                     ]
                 },
-                "currentHeight": 167.66665649414062,
+                "currentHeight": 167.65625,
                 "statements": [
                     {
                         "delimiter": ";",
@@ -284,8 +284,8 @@
             },
             "data": [
                 {
-                    "tabId": "04b00cc8-ca0f-45d9-b7f0-f52d4c33855e",
-                    "resultId": "72fe0fca-6ba2-4381-fc54-c301f27dca63",
+                    "tabId": "623ec85f-7bba-4ce9-fc9e-00e1424cec13",
+                    "resultId": "b6914998-f0f8-48cb-c09f-667e4f861a0f",
                     "rows": [
                         {
                             "0": 1,
@@ -311,7 +311,7 @@
                             "7": 1,
                             "8": 0,
                             "9": "2024-03-17 09:39:37.636895",
-                            "10": "2024-04-02 15:21:16.008900"
+                            "10": "2024-04-17 15:42:59.955141"
                         },
                         {
                             "0": 6,
@@ -407,13 +407,13 @@
                         }
                     ],
                     "executionInfo": {
-                        "text": "OK, 3 records retrieved in 2.457ms"
+                        "text": "OK, 3 records retrieved in 2.143ms"
                     },
                     "totalRowCount": 3,
                     "hasMoreRows": false,
                     "currentPage": 0,
                     "index": 0,
-                    "sql": "SELECT * from `meeting-room-booking-system`.`users`;"
+                    "sql": "SELECT * from `meeting-room-booking-system`.`users`"
                 }
             ]
         },
@@ -471,7 +471,7 @@
                 "result": {
                     "type": "resultIds",
                     "list": [
-                        "c448091d-b75e-40b8-9b68-ec6230fcf523"
+                        "fea1befd-a76a-497f-f4c0-3c920de3420a"
                     ]
                 },
                 "currentHeight": 161.65625,
@@ -498,12 +498,12 @@
             },
             "data": [
                 {
-                    "tabId": "04b00cc8-ca0f-45d9-b7f0-f52d4c33855e",
-                    "resultId": "c448091d-b75e-40b8-9b68-ec6230fcf523",
+                    "tabId": "623ec85f-7bba-4ce9-fc9e-00e1424cec13",
+                    "resultId": "fea1befd-a76a-497f-f4c0-3c920de3420a",
                     "rows": [
                         {
                             "0": 1,
-                            "1": "火星222",
+                            "1": "火星123",
                             "2": 10,
                             "3": "一层西",
                             "4": "白板",
@@ -612,7 +612,7 @@
                         }
                     ],
                     "executionInfo": {
-                        "text": "OK, 4 records retrieved in 1.868ms"
+                        "text": "OK, 4 records retrieved in 2.206ms"
                     },
                     "totalRowCount": 4,
                     "hasMoreRows": false,
@@ -633,8 +633,8 @@
                         {
                             "type": 4,
                             "index": 0,
-                            "resultId": "50ef256a-ff7a-44d4-ee60-69ed5dc5db0d",
-                            "content": "OK, 0 records retrieved in 2.046ms"
+                            "resultId": "18a1a609-dc91-48f2-bfaa-dacd543cef34",
+                            "content": "OK, 0 records retrieved in 1.996ms"
                         }
                     ]
                 },
@@ -652,6 +652,165 @@
                 ]
             },
             "data": []
+        },
+        {
+            "state": {
+                "start": 19,
+                "end": 19,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "d9cc0dad-f409-4c68-8ddc-53413a4bb460"
+                    ]
+                },
+                "currentHeight": 161.65625,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 52
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 52,
+                            "length": 0
+                        },
+                        "contentStart": 51,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "623ec85f-7bba-4ce9-fc9e-00e1424cec13",
+                    "resultId": "d9cc0dad-f409-4c68-8ddc-53413a4bb460",
+                    "rows": [
+                        {
+                            "0": 1,
+                            "1": "2024-04-18 22:02:19",
+                            "2": "2024-04-18 23:02:19",
+                            "3": "申请中",
+                            "4": "",
+                            "5": "2024-04-18 14:02:18.536362",
+                            "6": "2024-04-18 14:02:18.536362",
+                            "7": 1,
+                            "8": 1
+                        },
+                        {
+                            "0": 2,
+                            "1": "2024-04-18 22:02:19",
+                            "2": "2024-04-18 23:02:19",
+                            "3": "申请中",
+                            "4": "",
+                            "5": "2024-04-18 14:02:18.553310",
+                            "6": "2024-04-18 14:02:18.553310",
+                            "7": 2,
+                            "8": 2
+                        },
+                        {
+                            "0": 3,
+                            "1": "2024-04-18 22:02:19",
+                            "2": "2024-04-18 23:02:19",
+                            "3": "申请中",
+                            "4": "",
+                            "5": "2024-04-18 14:02:18.562988",
+                            "6": "2024-04-18 14:02:18.562988",
+                            "7": 2,
+                            "8": 1
+                        },
+                        {
+                            "0": 4,
+                            "1": "2024-04-18 22:02:19",
+                            "2": "2024-04-18 23:02:19",
+                            "3": "申请中",
+                            "4": "",
+                            "5": "2024-04-18 14:02:18.572556",
+                            "6": "2024-04-18 14:02:18.572556",
+                            "7": 1,
+                            "8": 2
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "id",
+                            "field": "0",
+                            "dataType": {
+                                "type": 4
+                            }
+                        },
+                        {
+                            "title": "startTime",
+                            "field": "1",
+                            "dataType": {
+                                "type": 26
+                            }
+                        },
+                        {
+                            "title": "endTime",
+                            "field": "2",
+                            "dataType": {
+                                "type": 26
+                            }
+                        },
+                        {
+                            "title": "status",
+                            "field": "3",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "note",
+                            "field": "4",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "createTime",
+                            "field": "5",
+                            "dataType": {
+                                "type": 26
+                            }
+                        },
+                        {
+                            "title": "updateTime",
+                            "field": "6",
+                            "dataType": {
+                                "type": 26
+                            }
+                        },
+                        {
+                            "title": "userId",
+                            "field": "7",
+                            "dataType": {
+                                "type": 4
+                            }
+                        },
+                        {
+                            "title": "roomId",
+                            "field": "8",
+                            "dataType": {
+                                "type": 4
+                            }
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 4 records retrieved in 2.009ms"
+                    },
+                    "totalRowCount": 4,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "SELECT * FROM `meeting-room-booking-system`.booking"
+                }
+            ]
         }
     ]
 }

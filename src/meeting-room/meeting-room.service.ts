@@ -3,7 +3,7 @@ import { CreateMeetingRoomDto } from './dto/create-meeting-room.dto';
 import { UpdateMeetingRoomDto } from './dto/update-meeting-room.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { MeetingRoom } from './entities/meeting-room.entity';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 @Injectable()
 export class MeetingRoomService {
@@ -32,16 +32,35 @@ export class MeetingRoomService {
     this.repository.insert([room1, room2, room3]);
   }
 
-  async findAll(pageNo: number, pageSize: number) {
+  async findAll(
+    pageNo: number,
+    pageSize: number,
+    name: string,
+    capacity: number,
+    equipment: string,
+  ) {
     if (pageNo < 1) {
       throw new BadRequestException('pageNo must be greater than 0');
     }
 
     const skipCount = (pageNo - 1) * pageSize;
 
+    const condition: Record<string, any> = {};
+
+    if (name) {
+      condition.name = Like(`%${name}%`);
+    }
+    if (capacity) {
+      condition.capacity = capacity;
+    }
+    if (equipment) {
+      condition.equipment = Like(`%${equipment}%`);
+    }
+
     const [meetingRooms, totalCount] = await this.repository.findAndCount({
       skip: skipCount,
       take: pageSize,
+      where: condition,
     });
 
     return {
@@ -51,7 +70,13 @@ export class MeetingRoomService {
   }
 
   async create(createMeetingRoomDto: CreateMeetingRoomDto) {
-    await this.validateName(createMeetingRoomDto.name);
+    const room = await this.repository.findOneBy({
+      name: createMeetingRoomDto.name,
+    });
+
+    if (room) {
+      throw new BadRequestException('room already exists');
+    }
 
     const meetingRoom = new MeetingRoom();
     meetingRoom.name = createMeetingRoomDto.name;
@@ -66,8 +91,6 @@ export class MeetingRoomService {
   }
 
   async update(meetingRoomDto: UpdateMeetingRoomDto) {
-    await this.validateName(meetingRoomDto.name);
-
     const meetingRoom = await this.repository.findOneBy({
       id: meetingRoomDto.id,
     });
@@ -92,13 +115,21 @@ export class MeetingRoomService {
     return res.affected;
   }
 
-  async validateName(name: string) {
-    const room = await this.repository.findOneBy({
-      name: name,
+  async findById(id: number) {
+    const meetingRoom = await this.repository.findOneBy({
+      id,
     });
 
-    if (room) {
-      throw new BadRequestException('room already exists');
+    if (!meetingRoom) {
+      throw new BadRequestException('room not found');
     }
+
+    return meetingRoom;
+  }
+
+  async delete(id: number) {
+    await this.repository.delete({ id });
+
+    return 'success';
   }
 }

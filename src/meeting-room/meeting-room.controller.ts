@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Query,
@@ -14,7 +13,7 @@ import { MeetingRoomService } from './meeting-room.service';
 import { CreateMeetingRoomDto } from './dto/create-meeting-room.dto';
 import { UpdateMeetingRoomDto } from './dto/update-meeting-room.dto';
 import { generateParseIntPipe } from 'src/utils';
-import { ApiBody, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ApiBody, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('meeting-room')
 @Controller('meeting-room')
@@ -22,17 +21,35 @@ export class MeetingRoomController {
   constructor(private readonly meetingRoomService: MeetingRoomService) {}
 
   @Get('list')
-  @ApiParam({
+  @ApiQuery({
     name: 'pageNo',
     type: Number,
     required: false,
     description: '页码',
   })
-  @ApiParam({
+  @ApiQuery({
     name: 'pageSize',
     type: Number,
     required: false,
     description: '每页数量',
+  })
+  @ApiQuery({
+    name: 'name',
+    type: String,
+    required: false,
+    description: '会议室名称',
+  })
+  @ApiQuery({
+    name: 'capacity',
+    type: Number,
+    required: false,
+    description: '容量',
+  })
+  @ApiQuery({
+    name: 'equipment',
+    type: String,
+    required: false,
+    description: '设备',
   })
   findAll(
     @Query('pageNo', new DefaultValuePipe(1), generateParseIntPipe('pageNo'))
@@ -43,8 +60,17 @@ export class MeetingRoomController {
       generateParseIntPipe('pageSize'),
     )
     pageSize: number,
+    @Query('name') name?: string,
+    @Query('capacity') capacity?: number,
+    @Query('equipment') equipment?: string,
   ) {
-    return this.meetingRoomService.findAll(pageNo, pageSize);
+    return this.meetingRoomService.findAll(
+      pageNo,
+      pageSize,
+      name,
+      capacity,
+      equipment,
+    );
   }
 
   @Post('')
@@ -129,5 +155,15 @@ export class MeetingRoomController {
   })
   async update(@Body() meetingRoomDto: UpdateMeetingRoomDto) {
     return this.meetingRoomService.update(meetingRoomDto);
+  }
+
+  @Get(':id')
+  async find(@Param('id', generateParseIntPipe('id')) id: number) {
+    return await this.meetingRoomService.findById(id);
+  }
+
+  @Delete(':id')
+  async delete(@Param('id', generateParseIntPipe('id')) id: number) {
+    return await this.meetingRoomService.delete(id);
   }
 }

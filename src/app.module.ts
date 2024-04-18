@@ -14,6 +14,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { LoginGuard } from './login.guard';
 import { PermissionGuard } from './permission.guard';
 import { MeetingRoomModule } from './meeting-room/meeting-room.module';
+import { BookingModule } from './booking/booking.module';
 
 @Module({
   imports: [
@@ -59,6 +60,7 @@ import { MeetingRoomModule } from './meeting-room/meeting-room.module';
     RedisModule,
     EmailModule,
     MeetingRoomModule,
+    BookingModule,
   ],
   controllers: [AppController],
   providers: [
