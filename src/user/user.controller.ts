@@ -8,7 +8,6 @@ import {
   HttpStatus,
   UnauthorizedException,
   Request,
-  ParseIntPipe,
   BadRequestException,
   DefaultValuePipe,
   UseInterceptors,

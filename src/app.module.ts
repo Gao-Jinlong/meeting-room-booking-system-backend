@@ -16,6 +16,7 @@ import { PermissionGuard } from './permission.guard';
 import { MeetingRoomModule } from './meeting-room/meeting-room.module';
 import { BookingModule } from './booking/booking.module';
 import { StatisticModule } from './statistic/statistic.module';
+import * as path from 'path';
 
 @Module({
   imports: [
@@ -33,7 +34,7 @@ import { StatisticModule } from './statistic/statistic.module';
     }),
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: ['src/.env', 'src/.env.mailer'],
+      envFilePath: path.join(__dirname, '.env'),
     }),
     TypeOrmModule.forRootAsync({
       useFactory(configService: ConfigService) {
@@ -44,7 +45,7 @@ import { StatisticModule } from './statistic/statistic.module';
           username: configService.get('mysql_server_user'),
           password: configService.get('mysql_server_password'),
           database: configService.get('mysql_server_database'),
-          synchronize: true,
+          synchronize: false,
           logging: true,
           entities: ['dist/**/*.entity{.ts,.js}'],
           poolSize: 10,
