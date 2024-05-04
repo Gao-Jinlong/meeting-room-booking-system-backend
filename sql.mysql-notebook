@@ -2,7 +2,7 @@
     "type": "MySQLNotebook",
     "version": "1.0",
     "caption": "DB Notebook",
-    "content": "\\about\nCREATE SCHEMA `meeting-room-booking-system`;\nSELECT * from `meeting-room-booking-system`.`users`;\ndelete from `meeting-room-booking-system`.`users`\nwhere id = 5;\n\nUPDATE `meeting-room-booking-system`.`users` SET avatar=\"uploads\\\\1712070986099-327865746-专题图 (1).png\" WHERE id=2;\nSELECT * from `meeting-room-booking-system`.meeting_room;\nDELETE FROM `meeting-room-booking-system`.meeting_room\nWHERE id NOT IN (\n    # 通过一个虚拟表避免同时查询和更新同一个表\n    SELECT MIN_ID\n    FROM (\n        SELECT MIN(id) AS MIN_ID\n        FROM `meeting-room-booking-system`.meeting_room\n        GROUP BY name\n    ) AS subquery # 每个派生(derived)表必须有他自己的别名\n);\nSELECT * FROM `meeting-room-booking-system`.booking;",
+    "content": "\\about\nCREATE SCHEMA `meeting-room-booking-system`;\nSELECT * from `meeting-room-booking-system`.`users`;\ndelete from `meeting-room-booking-system`.`users`\nwhere id = 5;\n\nUPDATE `meeting-room-booking-system`.`users` SET avatar=\"uploads\\\\1712070986099-327865746-专题图 (1).png\" WHERE id=2;\nSELECT * from `meeting-room-booking-system`.meeting_room;\nDELETE FROM `meeting-room-booking-system`.meeting_room\nWHERE id NOT IN (\n    # 通过一个虚拟表避免同时查询和更新同一个表\n    SELECT MIN_ID\n    FROM (\n        SELECT MIN(id) AS MIN_ID\n        FROM `meeting-room-booking-system`.meeting_room\n        GROUP BY name\n    ) AS subquery # 每个派生(derived)表必须有他自己的别名\n);\nSELECT * FROM `meeting-room-booking-system`.booking;\nselect u.username 用户名, count(*) 预定次数\nfrom booking b\nleft join users u\non b.userId = u.id\nwhere b.startTime between '2024-01-24' and '2024-09-30'\ngroup by b.userId;\n\nuse `meeting-room-booking-system`;\nselect m.name 会议室名称, count(*) 预定次数\nfrom booking b\nleft join meeting_room m\non b.roomId = m.id\nwhere b.startTime between '2024-01-24' and '2024-09-30'\ngroup by b.roomId;\n",
     "options": {
         "tabSize": 4,
         "indentSize": 4,
@@ -15,22 +15,22 @@
             {
                 "inSelectionMode": false,
                 "selectionStart": {
-                    "lineNumber": 3,
-                    "column": 53
+                    "lineNumber": 21,
+                    "column": 15
                 },
                 "position": {
-                    "lineNumber": 3,
-                    "column": 53
+                    "lineNumber": 21,
+                    "column": 15
                 }
             }
         ],
         "viewState": {
             "scrollLeft": 0,
             "firstPosition": {
-                "lineNumber": 4,
+                "lineNumber": 19,
                 "column": 1
             },
-            "firstPositionDeltaTop": 91
+            "firstPositionDeltaTop": 7
         },
         "contributionsState": {
             "editor.contrib.folding": {},
@@ -76,7 +76,7 @@
                 "result": {
                     "type": "resultIds",
                     "list": [
-                        "0ba534c0-3523-4dae-8f37-b9154796d82d"
+                        "dfd133f5-439a-4847-edc2-ea4c2d76e646"
                     ]
                 },
                 "currentHeight": 28,
@@ -103,8 +103,8 @@
             },
             "data": [
                 {
-                    "tabId": "623ec85f-7bba-4ce9-fc9e-00e1424cec13",
-                    "resultId": "0ba534c0-3523-4dae-8f37-b9154796d82d",
+                    "tabId": "3f30ddfa-5969-4406-ccc3-46b3e0f98322",
+                    "resultId": "dfd133f5-439a-4847-edc2-ea4c2d76e646",
                     "rows": [
                         {
                             "0": 1,
@@ -257,10 +257,10 @@
                 "result": {
                     "type": "resultIds",
                     "list": [
-                        "b6914998-f0f8-48cb-c09f-667e4f861a0f"
+                        "baaf6551-729f-45ce-d825-8fbac37ac0be"
                     ]
                 },
-                "currentHeight": 167.65625,
+                "currentHeight": 36,
                 "statements": [
                     {
                         "delimiter": ";",
@@ -284,8 +284,8 @@
             },
             "data": [
                 {
-                    "tabId": "623ec85f-7bba-4ce9-fc9e-00e1424cec13",
-                    "resultId": "b6914998-f0f8-48cb-c09f-667e4f861a0f",
+                    "tabId": "3f30ddfa-5969-4406-ccc3-46b3e0f98322",
+                    "resultId": "baaf6551-729f-45ce-d825-8fbac37ac0be",
                     "rows": [
                         {
                             "0": 1,
@@ -407,7 +407,7 @@
                         }
                     ],
                     "executionInfo": {
-                        "text": "OK, 3 records retrieved in 2.143ms"
+                        "text": "OK, 3 records retrieved in 2.366ms"
                     },
                     "totalRowCount": 3,
                     "hasMoreRows": false,
@@ -471,7 +471,7 @@
                 "result": {
                     "type": "resultIds",
                     "list": [
-                        "fea1befd-a76a-497f-f4c0-3c920de3420a"
+                        "bd372a9e-2973-4b6d-fe9f-f4eb15d43e26"
                     ]
                 },
                 "currentHeight": 161.65625,
@@ -498,8 +498,8 @@
             },
             "data": [
                 {
-                    "tabId": "623ec85f-7bba-4ce9-fc9e-00e1424cec13",
-                    "resultId": "fea1befd-a76a-497f-f4c0-3c920de3420a",
+                    "tabId": "3f30ddfa-5969-4406-ccc3-46b3e0f98322",
+                    "resultId": "bd372a9e-2973-4b6d-fe9f-f4eb15d43e26",
                     "rows": [
                         {
                             "0": 1,
@@ -661,7 +661,7 @@
                 "result": {
                     "type": "resultIds",
                     "list": [
-                        "d9cc0dad-f409-4c68-8ddc-53413a4bb460"
+                        "c3cb1545-3004-474e-9fbd-7f4d19a965f4"
                     ]
                 },
                 "currentHeight": 161.65625,
@@ -688,17 +688,17 @@
             },
             "data": [
                 {
-                    "tabId": "623ec85f-7bba-4ce9-fc9e-00e1424cec13",
-                    "resultId": "d9cc0dad-f409-4c68-8ddc-53413a4bb460",
+                    "tabId": "3f30ddfa-5969-4406-ccc3-46b3e0f98322",
+                    "resultId": "c3cb1545-3004-474e-9fbd-7f4d19a965f4",
                     "rows": [
                         {
                             "0": 1,
                             "1": "2024-04-18 22:02:19",
                             "2": "2024-04-18 23:02:19",
-                            "3": "申请中",
+                            "3": "审批通过",
                             "4": "",
                             "5": "2024-04-18 14:02:18.536362",
-                            "6": "2024-04-18 14:02:18.536362",
+                            "6": "2024-04-18 15:05:03",
                             "7": 1,
                             "8": 1
                         },
@@ -706,10 +706,10 @@
                             "0": 2,
                             "1": "2024-04-18 22:02:19",
                             "2": "2024-04-18 23:02:19",
-                            "3": "申请中",
+                            "3": "审批驳回",
                             "4": "",
                             "5": "2024-04-18 14:02:18.553310",
-                            "6": "2024-04-18 14:02:18.553310",
+                            "6": "2024-04-18 15:05:18",
                             "7": 2,
                             "8": 2
                         },
@@ -717,10 +717,10 @@
                             "0": 3,
                             "1": "2024-04-18 22:02:19",
                             "2": "2024-04-18 23:02:19",
-                            "3": "申请中",
+                            "3": "已解除",
                             "4": "",
                             "5": "2024-04-18 14:02:18.562988",
-                            "6": "2024-04-18 14:02:18.562988",
+                            "6": "2024-04-18 15:05:23",
                             "7": 2,
                             "8": 1
                         },
@@ -734,6 +734,17 @@
                             "6": "2024-04-18 14:02:18.572556",
                             "7": 1,
                             "8": 2
+                        },
+                        {
+                            "0": 5,
+                            "1": "2024-06-01 08:00:00",
+                            "2": "2024-06-01 09:00:00",
+                            "3": "申请中",
+                            "4": "",
+                            "5": "2024-04-18 15:00:01.860071",
+                            "6": "2024-04-18 15:00:01.860071",
+                            "7": 1,
+                            "8": 1
                         }
                     ],
                     "columns": [
@@ -802,15 +813,205 @@
                         }
                     ],
                     "executionInfo": {
-                        "text": "OK, 4 records retrieved in 2.009ms"
+                        "text": "OK, 5 records retrieved in 2ms"
                     },
-                    "totalRowCount": 4,
+                    "totalRowCount": 5,
                     "hasMoreRows": false,
                     "currentPage": 0,
                     "index": 0,
                     "sql": "SELECT * FROM `meeting-room-booking-system`.booking"
                 }
             ]
+        },
+        {
+            "state": {
+                "start": 20,
+                "end": 26,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "aedb0fe2-745b-4773-f7f8-b1b6a8292437"
+                    ]
+                },
+                "currentHeight": 114.328125,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 163
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    },
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 163,
+                            "length": 1
+                        },
+                        "contentStart": 162,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "3f30ddfa-5969-4406-ccc3-46b3e0f98322",
+                    "resultId": "aedb0fe2-745b-4773-f7f8-b1b6a8292437",
+                    "rows": [
+                        {
+                            "0": "ginlon",
+                            "1": 3
+                        },
+                        {
+                            "0": "liming",
+                            "1": 2
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "用户名",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "预定次数",
+                            "field": "1",
+                            "dataType": {
+                                "type": 4
+                            }
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 2 records retrieved in 3.516ms"
+                    },
+                    "totalRowCount": 2,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "select u.username 用户名, count(*) 预定次数\nfrom booking b\nleft join users u\non b.userId = u.id\nwhere b.startTime between '2024-01-24' and '2024-09-30'\ngroup by b.userId"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 27,
+                "end": 27,
+                "language": "mysql",
+                "result": {
+                    "type": "text",
+                    "text": [
+                        {
+                            "type": 4,
+                            "index": 0,
+                            "resultId": "907cf97a-40ee-48b9-baa3-70ccd77f25b1",
+                            "content": "OK, 0 records retrieved in 1.61ms"
+                        }
+                    ]
+                },
+                "currentHeight": 28,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 34
+                        },
+                        "contentStart": 0,
+                        "state": 3
+                    }
+                ]
+            },
+            "data": []
+        },
+        {
+            "state": {
+                "start": 28,
+                "end": 33,
+                "language": "mysql",
+                "result": {
+                    "type": "resultIds",
+                    "list": [
+                        "f10c634e-75e1-4324-b7db-275f863d8f5e"
+                    ]
+                },
+                "currentHeight": 114.328125,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 168
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": [
+                {
+                    "tabId": "3f30ddfa-5969-4406-ccc3-46b3e0f98322",
+                    "resultId": "f10c634e-75e1-4324-b7db-275f863d8f5e",
+                    "rows": [
+                        {
+                            "0": "火星123",
+                            "1": 3
+                        },
+                        {
+                            "0": "金星",
+                            "1": 2
+                        }
+                    ],
+                    "columns": [
+                        {
+                            "title": "会议室名称",
+                            "field": "0",
+                            "dataType": {
+                                "type": 17
+                            }
+                        },
+                        {
+                            "title": "预定次数",
+                            "field": "1",
+                            "dataType": {
+                                "type": 4
+                            }
+                        }
+                    ],
+                    "executionInfo": {
+                        "text": "OK, 2 records retrieved in 1.072ms"
+                    },
+                    "totalRowCount": 2,
+                    "hasMoreRows": false,
+                    "currentPage": 0,
+                    "index": 0,
+                    "sql": "select m.name 会议室名称, count(*) 预定次数\nfrom booking b\nleft join meeting_room m\non b.roomId = m.id\nwhere b.startTime between '2024-01-24' and '2024-09-30'\ngroup by b.roomId"
+                }
+            ]
+        },
+        {
+            "state": {
+                "start": 34,
+                "end": 34,
+                "language": "mysql",
+                "currentHeight": 180,
+                "statements": [
+                    {
+                        "delimiter": ";",
+                        "span": {
+                            "start": 0,
+                            "length": 0
+                        },
+                        "contentStart": 0,
+                        "state": 0
+                    }
+                ]
+            },
+            "data": []
         }
     ]
 }
